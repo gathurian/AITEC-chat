@@ -1,0 +1,10 @@
+Datenbankname:  Firma
+
+Tabelle: Personen
+Struktur:            	
+name			varchar(20)
+vorname			varchar(20)
+personalnummer		varchar(5)
+gehalt			decimal(10,0)
+geburtstag		date
+schluessel		varchar(5)
