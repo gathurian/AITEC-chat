@@ -4,7 +4,7 @@ $username = "aitec";
 $password = "dachs";
 $dbname = "firma";
 
-//ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
