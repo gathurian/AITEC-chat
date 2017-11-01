@@ -21,18 +21,30 @@
 	text-shadow:1px 1px 0 #FFFFFF;
 }
 
-#chatTopBar .blueButton{
-	background:url('../img/button_blue.png') no-repeat;
-	border:none !important;
-	color:#516D7F !important;
-	display:inline-block;
-	font-size:13px;
-	height:29px;
-	text-align:center;
-	text-shadow:1px 1px 0 rgba(255, 255, 255, 0.4);
-	width:175px;
-	margin:0;
-	cursor:pointer;
+#register{
+	height:35px;
+    width: 75px;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+	border:none;
+	position:relative;
+    padding-top: 5px;
+    padding-left: 5px;
+	float: left;
+	color:#777;
+	text-shadow:1px 1px 0 #FFFFFF;    
+}
+
+#admin{
+    height:35px;
+    width: 75px;;
+	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
+	border: none;
+	position:relative;
+    padding-top: 5px;
+    padding-right: 5px;
+	float: right;
+	color:#777;
+	text-shadow:1px 1px 0 #FFFFFF;    
 }
 
 #chatTopBar .name{
