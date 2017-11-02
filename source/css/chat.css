@@ -1,3 +1,8 @@
+h2{
+    padding-left: 35%;
+    padding-top: 5px;
+}
+
 /* Main chat container */
 
 #chatContainer{
@@ -66,6 +71,11 @@
 #chatLineHolder{
 	height:360px;
 	width:350px;
+	margin-bottom:20px;
+}
+
+#chatLineHolderAdmin{
+	height:360px;
 	margin-bottom:20px;
 }
 
@@ -157,6 +167,8 @@
 
 
 #chatBottomBar{
+    height: 40px;
+    margin-top: 15px;
 	background:url('../img/solid_gray.jpg') repeat-x #d0d0d0;
 	position:relative;
 	padding:10px;
