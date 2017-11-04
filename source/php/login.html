@@ -1,20 +1,43 @@
 <html>
-<head>
-	<title>Login</title>
 
-	<link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
-	<link rel="stylesheet" type="text/css" href="css/page.css" />
-	<link rel="stylesheet" type="text/css" href="css/chat.css" />
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/chat.css" />
 </head>
+
 <body>
-	<form action="login.php" method="post">
-	<input name="pn" size=5>Personalnummer<p>
-	<input name="vn" size=20>Vorname<p>
-	<input name="nn" size=20>Nachname<p>
-	<input name="gt" size=20>Geburtstag (jjjj-mm-tt)<p>
-	<input name="ge" size=10>Gehalt in EURO<p>
-	<input name="ke" size=5>Key<p>
-	<input type="submit" name="Abschicken" value="senden">
-</form>
+    <div id="chatContainer">
+        <div id="chatTopBar" class="rounded">
+            <h2>Registrieren</h2>
+        </div>
+        <div id="chatLineHolderLogin">
+            <form action="login.php" method="post" >
+                <input name="pn" size=5>Personalnummer
+                <p>
+                <input name="vn" size=20>Vorname
+                <p>
+                <input name="nn" size=20>Nachname
+                <p>
+                <input name="gt" size=20>Geburtstag (jjjj-mm-tt)
+                <p>
+                <input name="ge" size=10>Gehalt in EURO
+                <p>
+                <input name="ke" size=5>Key
+                <p>
+                <input type="submit" name="Abschicken" value="senden" class="blueButton">
+            </form>
+        </div>
+        <div id="chatBottomBar" class="rounded">
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jquery.mousewheel.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/script.js"></script>
 </body>
+
 </html>

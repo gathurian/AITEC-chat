@@ -1,23 +1,80 @@
-<?PHP
-    $host = 'localhost';
-    $user = 'aitec';
-    $pass = 'dachs';
-    $db = 'firma';
+<!DOCTYPE html>
+<html>
 
-    $mysqli = new mysqli($host, $user, $pass, $db);
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Making an AJAX Web Chat With PHP, MySQL and jQuery </title>
 
-    //show tables
-    $result = $mysqli->query("SELECT * from personen");
-    echo "<table>";
-    echo "<tr><th>Name</th><th>Vorname</th><th>Personalnummer</th></tr>";
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/chat.css" />
 
-    while($row = mysqli_fetch_array($result)) {
-        $name = $row['name'];
-        $vorname = $row['vorname'];
-        $personalnummer = $row['personalnummer'];
-        echo "<tr><td style='width: 20px;'>".$name."</td><td style='width: 20px;'>".$vorname."</td><td>".$personalnummer."</td></tr>";
-    } 
+</head>
 
-    echo "</table>";
-    mysqli_close($con);
-    ?>
+<body>
+
+    <div id="chatContainer">
+
+        <div id="chatTopBar" class="rounded">
+            <div id="admin">
+                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                    <input type="submit" class="blueButton" value="Logout">
+                </form>
+            </div>
+            <h2>Admin Panel</h2>
+
+        </div>
+        <div id="chatLineHolderAdmin">
+            <?PHP
+                $host = 'localhost';
+                $user = 'aitec';
+                $pass = 'dachs';
+                $db = 'firma';
+
+                $mysqli = new mysqli($host, $user, $pass, $db);
+
+                //show tables
+                $result = $mysqli->query("SELECT * from personen");
+                echo "<table>";
+                echo "<tr>
+                        <th id='name'>Name</th>
+                        <th>Vorname</th>
+                        <th>Personalnummer</th>
+                        <th id='adminApproved'>Admin-Approved</th>
+                    </tr>";
+
+                while($row = mysqli_fetch_array($result)) {
+                    $name = $row['name'];
+                    $vorname = $row['vorname'];
+                    $personalnummer = $row['personalnummer'];
+                    $approved = $row['approved'];
+                    if($approved === '0'){
+                        $status = "<button type='button'>Click Me!</button>"
+                    } else {
+                        $status = 'yes';
+                    }
+                    echo 
+                        "<tr>
+                            <td id='name'>".$name."</td>
+                            <td>".$vorname."</td><td>".$personalnummer."</td>
+                            <td>"echo $status"</td>
+                        </tr>";
+                } 
+
+                echo "</table>";
+                mysqli_close($con);
+            ?>
+        </div>
+
+        <div id="chatBottomBar" class="rounded">
+        </div>
+
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jquery.mousewheel.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/script.js"></script>
+</body>
+
+</html>

@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Making an AJAX Web Chat With PHP, MySQL and jQuery </title>
 
-    <link rel="stylesheet" type="text/css" href="js/jScrollPane/jScrollPane.css" />
-    <link rel="stylesheet" type="text/css" href="css/page.css" />
-    <link rel="stylesheet" type="text/css" href="css/chat.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/chat.css" />
 
 </head>
 
@@ -24,7 +24,11 @@
             <h2>Admin Panel</h2>
 
         </div>
-        <div id="chatLineHolderAdmin"></div>
+        <div id="chatLineHolder">
+            <form action="http://localhost/AITEC/source/php/show_tables.php">
+                    <input type="submit" class="blueButton" value="Registered Users">
+            </form>
+        </div>
 
         <div id="chatBottomBar" class="rounded">
         </div>
@@ -32,9 +36,9 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script src="js/jScrollPane/jquery.mousewheel.js"></script>
-    <script src="js/jScrollPane/jScrollPane.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jquery.mousewheel.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/script.js"></script>
 </body>
 
 </html>
