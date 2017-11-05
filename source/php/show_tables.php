@@ -26,6 +26,12 @@
         </div>
         <div id="chatLineHolderAdmin">
             <?PHP
+            
+            //Error-Reporting for debugging
+            //ini_set('display_errors', 1);
+            //ini_set('display_startup_errors', 1);
+            //error_reporting(E_ALL);
+            
                 $host = 'localhost';
                 $user = 'aitec';
                 $pass = 'dachs';
@@ -49,15 +55,19 @@
                     $personalnummer = $row['personalnummer'];
                     $approved = $row['approved'];
                     if($approved === '0'){
-                        $status = "<button type='button'>Click Me!</button>"
+                        $status = "<button type='submit' name='appr'>Approve</button>";
                     } else {
-                        $status = 'yes';
+                        $status = "<button type='submit' name='disappr'>Disapprove</button>";
                     }
+                    
+                    //todo: Actually update the "approved" flag on the DB
+                    
                     echo 
                         "<tr>
                             <td id='name'>".$name."</td>
-                            <td>".$vorname."</td><td>".$personalnummer."</td>
-                            <td>"echo $status"</td>
+                            <td>".$vorname."</td>
+                            <td>".$personalnummer."</td>
+                            <td>".$status."</td>
                         </tr>";
                 } 
 
