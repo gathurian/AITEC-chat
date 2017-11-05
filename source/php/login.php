@@ -29,12 +29,12 @@
                     die("Connection failed: " . $conn->connect_error);
                 } 
 
-                if(!$stat = $conn->prepare("INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag, schluessel) 
-                    VALUES (?,?,?,?,?,?)")){
+                if(!$stat = $conn->prepare("INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag) 
+                    VALUES (?,?,?,?,?)")){
                      echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                 }
 
-                if(!$stat -> bind_param("ssssss", $name, $vorname, $personalnummer, $gehalt, $geburtstag, $schluessel)){
+                if(!$stat -> bind_param("sssss", $name, $vorname, $personalnummer, $gehalt, $geburtstag)){
                     echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
                 }
 
@@ -43,7 +43,6 @@
                 $personalnummer = $_POST['pn'] ;
                 $gehalt = $_POST['ge'];
                 $geburtstag = $_POST['gt'];
-                $schluessel = $_POST['ke'];
 
                 if(!$stat->execute()){
                      echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
