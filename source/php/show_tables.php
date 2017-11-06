@@ -49,10 +49,19 @@
                     $personalnummer = $row['personalnummer'];
                     $approved = $row['approved'];
                     if($approved === '0'){
-                        $status = "<button type='submit' name='appr'> Approve </button>";
+                        $status =
+                            "<form action='http://localhost/AITEC/source/php/approve.php' method='post'>
+                                <input type='hidden' name='appr' value='1'>
+                                <input type='hidden' name='persnr' value='".$personalnummer."'>
+                                <input type='submit' class='blueButton' value='Approve'>
+                            </form>";
                     }
                     else{
-                        $status = "<button type='submit' name='disappr'> Disapprove </button>";
+                        $status = 
+                            "<form action='http://localhost/AITEC/source/php/approve.php' method='post'>
+                                <input type='hidden' name='appr' value='0'>
+                                <input type='submit' class='blueButton' value='Disapprove'>
+                            </form>";
 
                     }
                     
