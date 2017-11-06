@@ -37,9 +37,9 @@
                 $result = $mysqli->query("SELECT * from personen");
                 echo "<table>";
                 echo "<tr>
-                        <th id='name'>Name</th>
+                        <th id='persNo'>Personalnummer</th>
                         <th>Vorname</th>
-                        <th>Personalnummer</th>
+                        <th>Nachname</th>
                         <th id='adminApproved'>Admin-Approved</th>
                     </tr>";
 
@@ -49,16 +49,21 @@
                     $personalnummer = $row['personalnummer'];
                     $approved = $row['approved'];
                     if($approved === '0'){
-                        $status = "<button type='button'>Click Me!</button>"
-                    } else {
-                        $status = 'yes';
+                        $status = "<button type='submit' name='appr'> Approve </button>";
                     }
-                    echo 
+                    else{
+                        $status = "<button type='submit' name='disappr'> Disapprove </button>";
+
+                    }
+                    
+                    echo
                         "<tr>
-                            <td id='name'>".$name."</td>
-                            <td>".$vorname."</td><td>".$personalnummer."</td>
-                            <td>"echo $status"</td>
+                            <td id='persNo'>" .$personalnummer. "</td>
+                            <td>" .$name. "</td>
+                            <td>" .$vorname. "</td>
+                            <td>" .$status. "</td>
                         </tr>";
+                            
                 } 
 
                 echo "</table>";
