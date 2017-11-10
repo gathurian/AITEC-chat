@@ -20,10 +20,12 @@
                 $password = "dachs";
                 $dbname = "firma";
 
-                ini_set('display_errors', 1);
+            ini_set('display_errors', 1);
             error_reporting(E_ALL ^ E_NOTICE);
 
-
+                $approved = $_POST['appr'];
+                $persnr = $_POST['persnr'];
+            
                 // Create connection
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 // Check connection
@@ -40,18 +42,10 @@
                     echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
                 }
 
-                $approved = $_POST['appr'];
-                $persnr = $_POST['persnr'];
-
                 if(!$stat->execute()){
                      echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                 } else {
-            ?>
-                New Record added successfully!
-                <form action="http://localhost/AITEC/source/ajax-chat.html">
-                    <input type="submit" class="blueButton" value="Go back">
-                </form>
-                <?php
+                    echo "Everything's fine, matey";
                 }
 
                 $stat->close();
