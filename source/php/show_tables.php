@@ -60,6 +60,7 @@
                         $status = 
                             "<form action='http://localhost/AITEC/source/php/approve.php' method='post'>
                                 <input type='hidden' name='appr' value='0'>
+                                <input type='hidden' name='persnr' value='".$personalnummer."'>
                                 <input type='submit' class='blueButton' value='Disapprove'>
                             </form>";
 
