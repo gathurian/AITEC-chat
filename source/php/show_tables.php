@@ -40,7 +40,8 @@
                         <th id='persNo'>Personalnummer</th>
                         <th>Vorname</th>
                         <th>Nachname</th>
-                        <th id='adminApproved'>Admin-Approved</th>
+                        <th id='adminApproved'>Status</th>
+                        <th>Löschen</th>
                     </tr>";
 
                 while($row = mysqli_fetch_array($result)) {
@@ -72,6 +73,12 @@
                             <td>" .$name. "</td>
                             <td>" .$vorname. "</td>
                             <td>" .$status. "</td>
+                            <td>
+                                <form action='http://localhost/AITEC/source/php/delete.php' method='post'>
+                                    <input type='hidden' name='persnr' value='".$personalnummer."'>
+                                    <input type='submit' class='blueButton' value='Löschen'>
+                                </form>
+                            </td>
                         </tr>";
                             
                 } 

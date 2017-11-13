@@ -34,7 +34,6 @@
                 ini_set('display_errors', 1);
                 error_reporting(E_ALL ^ E_NOTICE);
 
-                $approved = $_POST['appr'];
                 $persnr = $_POST['persnr'];
 
                 // Create connection
@@ -45,29 +44,27 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                if(!$stat = $conn->prepare("UPDATE personen SET approved=? WHERE personalnummer=?")){
+                if(!$stat = $conn->prepare("DELETE FROM personen WHERE personalnummer=?")){
                         echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                 }
 
-                if(!$stat -> bind_param("ds", $approved, $persnr)){
+                if(!$stat -> bind_param("s", $persnr)){
                     echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
                 }
 
                 if(!$stat->execute()){
                      echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                 } else {
-                    echo "User updated";
+                    echo "User gelöscht";
                 }
-
-
 
                 $conn->close();
             ?>
-
+            
             <form action="http://localhost/AITEC/source/ajax-chat.html">
-                <input type="submit" class="blueButton" value="Go back">
+                    <input type="submit" class="blueButton" value="Go back">
             </form>
-        </div>
+            </div>
 
         <div id="chatBottomBar" class="rounded">
         </div>
