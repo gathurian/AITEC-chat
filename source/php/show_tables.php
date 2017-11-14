@@ -37,11 +37,12 @@
                 $result = $mysqli->query("SELECT * from personen");
                 echo "<table>";
                 echo "<tr>
-                        <th id='persNo'>Personalnummer</th>
+                        <th id='persNo'>Pers. Nr</th>
                         <th>Vorname</th>
                         <th>Nachname</th>
-                        <th id='adminApproved'>Status</th>
-                        <th>Löschen</th>
+                        <th id='adminApproved'></th>
+                        <th></th>
+                        <th></th>
                     </tr>";
 
                 while($row = mysqli_fetch_array($result)) {
@@ -79,6 +80,13 @@
                                     <input type='submit' class='blueButton' value='Löschen'>
                                 </form>
                             </td>
+                            <td>
+                                <form action='http://localhost/AITEC/source/edit.html' method='post'>
+                                    <input type='hidden' name='persnr' value='".$personalnummer."'>
+                                    <input type='submit' class='blueButton' value='Bearbeiten'>
+                                </form>
+                            </td>
+                            
                         </tr>";
                             
                 } 
