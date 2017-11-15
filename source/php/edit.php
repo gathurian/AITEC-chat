@@ -48,7 +48,7 @@
                 } else {
             ?>
                 Benutzer erfolgreich bearbeitet
-                <form action="http://localhost/AITEC/source/php/show_tables.php">
+                <form action="http://localhost/AITEC/source/php/show_users.php">
                     <input type="submit" class="blueButton" value="Zurück">
                 </form>
                 <?php

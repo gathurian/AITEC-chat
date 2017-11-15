@@ -1,72 +1,110 @@
-<html>
-
+<?php
+require_once 'config.php';
+ 
+// Define variables and initialize with empty values
+$username = $password = "";
+$username_err = $password_err = "";
+ 
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+ 
+    // Check if username is empty
+    if(empty(trim($_POST["username"]))){
+        $username_err = 'Please enter username.';
+    } else{
+        $username = trim($_POST["username"]);
+    }
+    
+    // Check if password is empty
+    if(empty(trim($_POST['password']))){
+        $password_err = 'Please enter your password.';
+    } else{
+        $password = trim($_POST['password']);
+    }
+    
+    // Validate credentials
+    if(empty($username_err) && empty($password_err)){
+        // Prepare a select statement
+        $sql = "SELECT username, password FROM admin WHERE username = ?";
+        
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            
+            // Set parameters
+            $param_username = $username;
+            
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                // Store result
+                mysqli_stmt_store_result($stmt);
+                
+                // Check if username exists, if yes then verify password
+                if(mysqli_stmt_num_rows($stmt) == 1){                    
+                    // Bind result variables
+                    mysqli_stmt_bind_result($stmt, $username, $hashed_password);
+                    if(mysqli_stmt_fetch($stmt)){
+                        if(password_verify($password, $hashed_password)){
+                            /* Password is correct, so start a new session and
+                            save the username to the session */
+                            session_start();
+                            $_SESSION['username'] = $username;      
+                            header("Location: http://localhost/AITEC/source/php/show_users.php");
+                            exit;
+                        } else{
+                            // Display an error message if password is not valid
+                            $password_err = 'The password you entered was not valid.';
+                        }
+                    }
+                } else{
+                    // Display an error message if username doesn't exist
+                    $username_err = 'No account found with that username.';
+                }
+            } else{
+                echo "Oops! Something went wrong. Please try again later.";
+            }
+        }
+        
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+    
+    // Close connection
+    mysqli_close($link);
+}
+?>
+ 
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Login</title>
-
-    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
-    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
-    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/chat.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 350px; padding: 20px; }
+    </style>
 </head>
-
 <body>
-    <div id="chatContainer">
-        <div id="chatTopBar" class="rounded">
-            <h2>Registrieren</h2>
-        </div>
-        <div id="chatLineHolderLogin">
-            <?php
-                $servername = "localhost";
-                $username = "aitec";
-                $password = "dachs";
-                $dbname = "firma";
-
-                ini_set('display_errors', 1);
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } 
-
-                if(!$stat = $conn->prepare("INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag) 
-                    VALUES (?,?,?,?,?)")){
-                     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-                }
-
-                if(!$stat -> bind_param("sssss", $name, $vorname, $personalnummer, $gehalt, $geburtstag)){
-                    echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
-                }
-
-                $name = $_POST['nn'];
-                $vorname = $_POST['vn'];
-                $personalnummer = $_POST['pn'] ;
-                $gehalt = $_POST['ge'];
-                $geburtstag = $_POST['gt'];
-
-                if(!$stat->execute()){
-                     echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
-                } else {
-            ?>
-                New Record added successfully!
-                <form action="http://localhost/AITEC/source/ajax-chat.html">
-                    <input type="submit" class="blueButton" value="Go back">
-                </form>
-                <?php
-                }
-
-                $stat->close();
-                $conn->close();
-            ?>
-        </div>
-        <div id="chatBottomBar" class="rounded">
-        </div>
-    </div>
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script src="http://localhost/AITEC/source/js/jScrollPane/jquery.mousewheel.js"></script>
-    <script src="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.min.js"></script>
-    <script src="http://localhost/AITEC/source/js/script.js"></script>
+    <div class="wrapper">
+        <h2>Login</h2>
+        <p>Please fill in your credentials to login.</p>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Username:<sup>*</sup></label>
+                <input type="text" name="username"class="form-control" value="<?php echo $username; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>    
+            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                <label>Password:<sup>*</sup></label>
+                <input type="password" name="password" class="form-control">
+                <span class="help-block"><?php echo $password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        </form>
+    </div>    
 </body>
-
 </html>
