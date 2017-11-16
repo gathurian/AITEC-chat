@@ -1,35 +1,75 @@
-<?php  //Start the Session
-session_start();
- require('config.php');
-//3. If the form is submitted or not.
-//3.1 If the form is submitted
-if (isset($_POST['user']) and isset($_POST['passwd'])){
-//3.1.1 Assigning posted values to variables.
-$username = $_POST['user'];
-$password = $_POST['passwd'];
-//3.1.2 Checking the values are existing in the database or not
-$query = "SELECT * FROM `admin` WHERE username='$username' and password='$password'";
- 
-$result = mysqli_query($link, $query) or die(mysqli_error($connection));
-$count = mysqli_num_rows($result);
-//3.1.2 If the posted values are equal to the database values, then session will be created for the user.
-if ($count == 1){
-$_SESSION['user'] = $username;
-}else{
-//3.1.3 If the login credentials doesn't match, he will be shown with an error message.
-$fmsg = "Invalid Login Credentials.";
-    echo $fmsg;
-}
-}
-//3.1.4 if the user is logged in Greets the user with message
-if (isset($_SESSION['user'])){
-$username = $_SESSION['user'];
-echo "Hai " . $username . "
-";
-echo "This is the Members Area
-";
-echo "<a href='logout.php'>Logout</a>";
- 
-}else{
-//3.2 When the user visits the page first time, simple login form will be displayed.
-?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Admin-Login</title>
+
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
+    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/chat.css" />
+
+</head>
+
+<body>
+
+    <div id="chatContainer">
+
+        <div id="chatTopBar" class="rounded">
+            <div id="admin">
+                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                    <input type="submit" class="blueButton" value="Logout">
+                </form>
+            </div>
+            <h2>Login</h2>
+
+        </div>
+        <div id="chatLineHolderAdmin">
+            <?php
+            require('config.php');
+
+            $user = trim($_POST['user']);
+            $passwd = trim($_POST['passwd']);
+            
+
+            if(($_SERVER["REQUEST_METHOD"] == "POST") && (!empty($user)) && (!empty($passwd))){
+                if(!$stat = $conn->prepare("SELECT * FROM admin WHERE username=? AND passcode=?")){
+                    echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+                }
+
+                if(!$stat -> bind_param("ss", $user, $passwd)){
+                    echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
+                }
+
+                if(!$stat->execute()){
+                    echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
+                } else {
+                    $stat->store_result();
+                    if($stat->num_rows == 1){
+                        header("Location: http://localhost/AITEC/source/php/show_users.php");
+                        exit;
+                    } else {
+                        echo "Ungültige Logindaten";
+                        header("Refresh: 2; URL=http://localhost/AITEC/source/login.html");
+                    }
+                }
+                $stat -> close();
+            } else {
+                echo "Bitte geben Sie einen gültigen Benutzernamen und ein gültiges Passwort ein";
+                header("Refresh: 2; URL=http://localhost/AITEC/source/login.html");
+            }
+
+            $conn->close();
+            ?>
+            </div>
+        <div id="chatBottomBar" class="rounded">
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jquery.mousewheel.js"></script>
+    <script src="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.min.js"></script>
+    <script src="http://localhost/AITEC/source/js/script.js"></script>
+</body>
+
+</html>
