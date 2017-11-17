@@ -15,19 +15,7 @@
         </div>
         <div id="chatLineHolderLogin">
             <?php
-                $servername = "localhost";
-                $username = "aitec";
-                $password = "dachs";
-                $dbname = "firma";
-
-                ini_set('display_errors', 1);
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                } 
+                require('config.php');
 
                 if(!$stat = $conn->prepare("UPDATE personen SET name=?, vorname=?, gehalt=?, geburtstag=? WHERE personalnummer=?")){
                      echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
@@ -47,7 +35,7 @@
                      echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                 } else {
             ?>
-                Benutzer erfolgreich bearbeitet
+                Benutzer erfolgreich bearbeitet.
                 <form action="http://localhost/AITEC/source/php/show_users.php">
                     <input type="submit" class="blueButton" value="Zurück">
                 </form>

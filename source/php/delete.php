@@ -26,23 +26,7 @@
         </div>
         <div id="chatLineHolderAdmin">
             <?php
-                $servername = "localhost";
-                $username = "aitec";
-                $password = "dachs";
-                $dbname = "firma";
-
-                ini_set('display_errors', 1);
-                error_reporting(E_ALL ^ E_NOTICE);
-
-                $persnr = $_POST['persnr'];
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                require('config.php');
 
                 if(!$stat = $conn->prepare("DELETE FROM personen WHERE personalnummer=?")){
                         echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;

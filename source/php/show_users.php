@@ -52,16 +52,14 @@
                     $approved = $row['approved'];
                     if($approved === '0'){
                         $status =
-                            "<form action='http://localhost/AITEC/source/php/approve.php' method='post'>
-                                <input type='hidden' name='appr' value='1'>
+                            "<form action='http://localhost/AITEC/source/php/set_approve.php' method='post'>
                                 <input type='hidden' name='persnr' value='".$personalnummer."'>
                                 <input type='submit' class='blueButton' value='Approve'>
                             </form>";
                     }
                     else{
                         $status = 
-                            "<form action='http://localhost/AITEC/source/php/approve.php' method='post'>
-                                <input type='hidden' name='appr' value='0'>
+                            "<form action='http://localhost/AITEC/source/php/disapprove.php' method='post'>
                                 <input type='hidden' name='persnr' value='".$personalnummer."'>
                                 <input type='submit' class='blueButton' value='Disapprove'>
                             </form>";
