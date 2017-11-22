@@ -22,6 +22,7 @@
                 $personalnummer = $_POST['pn'] ;
                 $gehalt = $_POST['ge'];
                 $geburtstag = $_POST['gt'];
+                $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
                     
                 
                 if(!$stat = $conn->prepare("INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag) 

@@ -17,7 +17,7 @@
 
         <div id="chatTopBar" class="rounded">
             <div id="admin">
-                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                <form action="http://localhost/AITEC/source/php/logout.php">
                     <input type="submit" class="blueButton" value="Logout">
                 </form>
             </div>
@@ -27,22 +27,26 @@
         <div id="chatLineHolderAdmin">
             <?php
                 require('config.php');
+                if($_SESSION['logon']){
+                    if(!$stat = $conn->prepare("DELETE FROM personen WHERE personalnummer=?")){
+                            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+                    }
 
-                if(!$stat = $conn->prepare("DELETE FROM personen WHERE personalnummer=?")){
-                        echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-                }
+                    if(!$stat -> bind_param("s", $persnr)){
+                        echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
+                    }
 
-                if(!$stat -> bind_param("s", $persnr)){
-                    echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
-                }
+                    if(!$stat->execute()){
+                         echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
+                    } else {
+                        echo "User gelöscht";
+                    }
 
-                if(!$stat->execute()){
-                     echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
+                    $conn->close();
                 } else {
-                    echo "User gelöscht";
+                    echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
+                    header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
                 }
-
-                $conn->close();
             ?>
             
             <form action="http://localhost/AITEC/source/ajax-chat.html">

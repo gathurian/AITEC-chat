@@ -17,7 +17,7 @@
 
         <div id="chatTopBar" class="rounded">
             <div id="admin">
-                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                <form action="http://localhost/AITEC/source/php/logout.php">
                     <input type="submit" class="blueButton" value="Logout">
                 </form>
             </div>
@@ -26,71 +26,74 @@
         </div>
         <div id="chatLineHolderAdmin">
             <?PHP
-                $host = 'localhost';
-                $user = 'aitec';
-                $pass = 'dachs';
-                $db = 'firma';
+                error_reporting(E_ALL ^ E_NOTICE);
+                require('functions.php');
+                require('config.php');
+            
+                sec_session_start();
+                if($_SESSION['logon']){
+            
+                    $host = 'localhost';
+                    $user = 'aitec';
+                    $pass = 'dachs';
+                    $db = 'firma';
 
-                $mysqli = new mysqli($host, $user, $pass, $db);
+                    $mysqli = new mysqli($host, $user, $pass, $db);
 
-                //show tables
-                $result = $mysqli->query("SELECT * from personen");
-                echo "<table>";
-                echo "<tr>
-                        <th id='persNo'>Pers. Nr</th>
-                        <th>Vorname</th>
-                        <th>Nachname</th>
-                        <th id='adminApproved'></th>
-                        <th></th>
-                        <th></th>
-                    </tr>";
-
-                while($row = mysqli_fetch_array($result)) {
-                    $name = $row['name'];
-                    $vorname = $row['vorname'];
-                    $personalnummer = $row['personalnummer'];
-                    $approved = $row['approved'];
-                    if($approved === '0'){
-                        $status =
-                            "<form action='http://localhost/AITEC/source/php/set_approve.php' method='post'>
-                                <input type='hidden' name='persnr' value='".$personalnummer."'>
-                                <input type='submit' class='blueButton' value='Approve'>
-                            </form>";
-                    }
-                    else{
-                        $status = 
-                            "<form action='http://localhost/AITEC/source/php/disapprove.php' method='post'>
-                                <input type='hidden' name='persnr' value='".$personalnummer."'>
-                                <input type='submit' class='blueButton' value='Disapprove'>
-                            </form>";
-
-                    }
-                    
-                    echo
-                        "<tr>
-                            <td id='persNo'>" .$personalnummer. "</td>
-                            <td>" .$name. "</td>
-                            <td>" .$vorname. "</td>
-                            <td>" .$status. "</td>
-                            <td>
-                                <form action='http://localhost/AITEC/source/php/delete.php' method='post'>
-                                    <input type='hidden' name='persnr' value='".$personalnummer."'>
-                                    <input type='submit' class='blueButton' value='Löschen'>
-                                </form>
-                            </td>
-                            <td>
-                                <form action='http://localhost/AITEC/source/edit.html' method='post'>
-                                    <input type='hidden' name='persnr' value='".$personalnummer."'>
-                                    <input type='submit' class='blueButton' value='Bearbeiten'>
-                                </form>
-                            </td>
-                            
+                    //show tables
+                    $result = $mysqli->query("SELECT * from personen");
+                    echo "<table>";
+                    echo "<tr>
+                            <th id='persNo'>Pers. Nr</th>
+                            <th>Vorname</th>
+                            <th>Nachname</th>
+                            <th id='adminApproved'></th>
+                            <th></th>
                         </tr>";
-                            
-                } 
 
-                echo "</table>";
-                mysqli_close($con);
+                    while($row = mysqli_fetch_array($result)) {
+                        $name = $row['name'];
+                        $vorname = $row['vorname'];
+                        $personalnummer = $row['personalnummer'];
+                        $approved = $row['approved'];
+                        if($approved === '0'){
+                            $status =
+                                "<form action='http://localhost/AITEC/source/php/set_approve.php' method='post'>
+                                    <input type='hidden' name='persnr' value='".$personalnummer."'>
+                                    <input type='submit' class='blueButton' value='Approve'>
+                                </form>";
+                        }
+                        else{
+                            $status = 
+                                "<form action='http://localhost/AITEC/source/php/disapprove.php' method='post'>
+                                    <input type='hidden' name='persnr' value='".$personalnummer."'>
+                                    <input type='submit' class='blueButton' value='Disapprove'>
+                                </form>";
+
+                        }
+
+                        echo
+                            "<tr>
+                                <td id='persNo'>" .$personalnummer. "</td>
+                                <td>" .$name. "</td>
+                                <td>" .$vorname. "</td>
+                                <td>" .$status. "</td>
+                                <td>
+                                    <form action='http://localhost/AITEC/source/php/delete.php' method='post'>
+                                        <input type='hidden' name='persnr' value='".$personalnummer."'>
+                                        <input type='submit' class='blueButton' value='Löschen'>
+                                    </form>
+                                </td>
+                            </tr>";
+
+                    } 
+
+                    echo "</table>";
+                    mysqli_close($con);
+                } else {
+                    echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
+                    header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                }
             ?>
         </div>
 

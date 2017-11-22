@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Benutzer bearbeiten</title>
+    <title>Benutzer-Registration</title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -11,32 +11,33 @@
 <body>
     <div id="chatContainer">
         <div id="chatTopBar" class="rounded">
-            <h2>Benutzer bearbeiten</h2>
+            <h2>Benutzer-Registration</h2>
         </div>
         <div id="chatLineHolderLogin">
             <?php
                 require('config.php');
-
-                if(!$stat = $conn->prepare("UPDATE personen SET name=?, vorname=?, gehalt=?, geburtstag=? WHERE personalnummer=?")){
+                
+                $user = $_POST['un'];
+                $pw = $_POST['pw'];
+                $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
+                $password =  hash('sha512', $pw . $salt);
+                    
+                
+                if(!$stat = $conn->prepare("INSERT INTO admin (username, passcode, salt) 
+                    VALUES (?,?,?)")){
                      echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                 }
 
-                if(!$stat -> bind_param("sssss", $name, $vorname, $gehalt, $geburtstag, $personalnummer)){
+                if(!$stat -> bind_param("sss", $user, $password, $salt)){
                     echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
                 }
-
-                $name = $_POST['nn'];
-                $vorname = $_POST['vn'];
-                $personalnummer = $_POST['pn'] ;
-                $gehalt = $_POST['ge'];
-                $geburtstag = $_POST['gt'];
 
                 if(!$stat->execute()){
                      echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                 } else {
+                    echo "$vorname \n $name \n wurde der Datenbank hinzugefügt";
             ?>
-                Benutzer erfolgreich bearbeitet.
-                <form action="http://localhost/AITEC/source/php/show_users.php">
+                <form action="http://localhost/AITEC/source/ajax-chat.html">
                     <input type="submit" class="blueButton" value="Zurück">
                 </form>
                 <?php

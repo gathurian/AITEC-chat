@@ -5,6 +5,7 @@ define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'aitec');
 define('DB_PASSWORD', 'dachs');
 define('DB_NAME', 'firma');
+define("SECURE", FALSE);
  
 /* Attempt to connect to MySQL database */
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);

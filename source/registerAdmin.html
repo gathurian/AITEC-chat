@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Benutzer bearbeiten</title>
+    <title>Benutzer-Registration</title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -11,21 +11,14 @@
 <body>
     <div id="chatContainer">
         <div id="chatTopBar" class="rounded">
-            <h2>Benutzer bearbeiten</h2>
+            <h2>Benutzer-Registration</h2>
         </div>
         <div id="chatLineHolderLogin">
-            <form action="edit.php" method="post" >
-                <input name="pn" size=5>Personalnummer
+            <form action="http://localhost/AITEC/source/php/registerAdmin.php" method="post" >
+                <input name="un" size=20>Benutzername
                 <p>
-                <input name="vn" size=20>Vorname
-                <p>
-                <input name="nn" size=20>Nachname
-                <p>
-                <input name="gt" size=20>Geburtstag (jjjj-mm-tt)
-                <p>
-                <input name="ge" size=10>Gehalt in EURO
-                <p>
-                <input type="submit" name="Abschicken" value="speichern" class="blueButton">
+                <input name="pw" size=20 type="password">Passwort
+                <input type="submit" name="Abschicken" value="Registrieren" class="blueButton">
             </form>
         </div>
         <div id="chatBottomBar" class="rounded">

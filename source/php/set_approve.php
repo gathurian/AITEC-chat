@@ -14,9 +14,22 @@
             <h2>Benutzer-Freischaltung</h2>
         </div>
         <?php
+            echo $_SESSION['logon'];
+            if($_SESSION['logon']){
+                echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
+                ?>
+                <style type="text/css">#chatLineHolderLogin{
+                display:none;
+                }</style>
+                <?php
+                header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+            }
             $personalnummer = $_POST['persnr'] ;
         ?>
         <div id="chatLineHolderLogin">
+            <?php
+            echo $_SESSION['logon'];
+            ?>
             Bitte setzen Sie ein Passwort für den freizuschaltenden Benutzer
             <form action="http://localhost/AITEC/source/php/approve.php" method="post" >
                 <input name="persnr" value="<?php echo htmlspecialchars($personalnummer); ?>" readonly>
