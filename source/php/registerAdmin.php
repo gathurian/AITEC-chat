@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Benutzer-Registration</title>
+    <title>AITEC HS2017 - PHP WebChat</title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />

@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Making an AJAX Web Chat With PHP, MySQL and jQuery </title>
+    <title>AITEC HS2017 - PHP WebChat </title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -31,7 +31,7 @@
                 ini_set('display_errors', 1);
                 error_reporting(E_ALL ^ E_NOTICE);
             
-                if($_SESSION['logon']){
+               if($_SERVER[HTTP_REFERER]== "http://localhost/AITEC/source/php/set_approve.php"){
                     $persnr = $_POST['persnr'];
                     $pw_clear = $_POST['pw'];
                     $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
@@ -54,8 +54,8 @@
 
                     $conn->close();
                 } else {
-                    echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
-                    header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                    echo "Benutzer können nur über das Admin-Panel freigeschaltet werden";
+                    header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                 }
             ?>
         </div>

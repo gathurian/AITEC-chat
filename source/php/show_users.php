@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Making an AJAX Web Chat With PHP, MySQL and jQuery </title>
+    <title>AITEC HS2017 - PHP WebChat</title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -31,7 +31,7 @@
                 require('config.php');
             
                 sec_session_start();
-                if($_SESSION['logon']){
+                if($_SESSION['logon'] == 1){
             
                     $host = 'localhost';
                     $user = 'aitec';

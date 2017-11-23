@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Admin-Login</title>
+        <title>AITEC HS2017 - PHP WebChat</title>
 
         <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
         <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -48,18 +48,18 @@
                         $password = hash('sha512', $passwd . $salt);
                         if($password == $passcode){
                             sec_session_start();
-                            $_SESSION['logon'] = true;
-                            header("Location: http://localhost/AITEC/source/php/show_users.php");
+                            $_SESSION['logon'] = 1;
+                            header("Refresh: 1; URL=http://localhost/AITEC/source/php/show_users.php");
                             exit;
                         } else {
                             echo "Ungültige Logindaten";
-                            header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                            header("Refresh: 2; URL=http://localhost/AITEC/source/php/login_admin.html");
                         }
                     }
                     $stat -> close();
                 } else {
                     echo "Bitte geben Sie einen gültigen Benutzernamen und ein gültiges Passwort ein";
-                    header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                    header("Refresh: 2; URL=http://localhost/AITEC/source/php/login_admin.html");
                 }
 
                 $conn->close();

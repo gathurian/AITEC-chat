@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Benutzer-Freischaltung</title>
+    <title>AITEC HS2017 - PHP WebChat</title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -14,22 +14,19 @@
             <h2>Benutzer-Freischaltung</h2>
         </div>
         <?php
-            echo $_SESSION['logon'];
-            if($_SESSION['logon']){
-                echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
+            //if($_SESSION['logon'] != 1){
+            if($_SERVER[HTTP_REFERER]!= "http://localhost/AITEC/source/php/show_users.php"){
+                echo "Benutzer können nur über das Admin-Panel freigeschaltet werden.";
                 ?>
                 <style type="text/css">#chatLineHolderLogin{
                 display:none;
                 }</style>
                 <?php
-                header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
             }
-            $personalnummer = $_POST['persnr'] ;
+            $personalnummer = $_POST['persnr']; 
         ?>
         <div id="chatLineHolderLogin">
-            <?php
-            echo $_SESSION['logon'];
-            ?>
             Bitte setzen Sie ein Passwort für den freizuschaltenden Benutzer
             <form action="http://localhost/AITEC/source/php/approve.php" method="post" >
                 <input name="persnr" value="<?php echo htmlspecialchars($personalnummer); ?>" readonly>

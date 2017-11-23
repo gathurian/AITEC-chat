@@ -37,15 +37,15 @@
         [CONTEXT_PREFIX] => 
         [CONTEXT_DOCUMENT_ROOT] => /home/aitec/www 
         [SERVER_ADMIN] => webmaster@localhost 
-        [SCRIPT_FILENAME] => /home/aitec/www/AITEC/source/php/login_admin.php 
+        [SCRIPT_FILENAME] => /home/aitec/www/AITEC/source/php/login_admin.html 
         [REMOTE_PORT] => 40248 
         [GATEWAY_INTERFACE] => CGI/1.1 
         [SERVER_PROTOCOL] => HTTP/1.1 
         [REQUEST_METHOD] => POST 
         [QUERY_STRING] => 
-        [REQUEST_URI] => /AITEC/source/php/login_admin.php 
-        [SCRIPT_NAME] => /AITEC/source/php/login_admin.php 
-        [PHP_SELF] => /AITEC/source/php/login_admin.php 
+        [REQUEST_URI] => /AITEC/source/php/login_admin.html 
+        [SCRIPT_NAME] => /AITEC/source/php/login_admin.html 
+        [PHP_SELF] => /AITEC/source/php/login_admin.html 
         [REQUEST_TIME_FLOAT] => 1511339393.572 
         [REQUEST_TIME] => 1511339393 
     )

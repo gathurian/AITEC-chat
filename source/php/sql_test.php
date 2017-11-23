@@ -2,7 +2,9 @@
                 ini_set('display_errors', 1);
                 error_reporting(E_ALL ^ E_NOTICE);
 require("config.php");
-$user = "admin";
+
+echo $_SERVER['HTTP_REFERER'];
+/*$user = "admin";
 if(!$stat = $conn->prepare("SELECT * FROM admin WHERE username=?")){
     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
 }
@@ -19,7 +21,7 @@ if(!$stat->execute()){
     $result = $stat->get_result()->fetch_assoc();
     $passcode = $result[passcode];
     echo $passcode;
-}
+}*/
 
 /*$result = $conn->query("SELECT * FROM admin WHERE username='admin'");
   while($row = mysqli_fetch_array($result)) {

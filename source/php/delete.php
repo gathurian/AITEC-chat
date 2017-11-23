@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Making an AJAX Web Chat With PHP, MySQL and jQuery </title>
+    <title>AITEC HS2017 - PHP WebChat</title>
 
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
     <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
@@ -27,7 +27,7 @@
         <div id="chatLineHolderAdmin">
             <?php
                 require('config.php');
-                if($_SESSION['logon']){
+                if($_SERVER[HTTP_REFERER]== "http://localhost/AITEC/source/php/show_users.php"){
                     if(!$stat = $conn->prepare("DELETE FROM personen WHERE personalnummer=?")){
                             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                     }
@@ -44,8 +44,8 @@
 
                     $conn->close();
                 } else {
-                    echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
-                    header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                    echo "Benutzer können nur über das Admin-Panel gelöscht werden";
+                    header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                 }
             ?>
             
