@@ -13,6 +13,11 @@
         <div id="chatTopBar" class="rounded">
             <h2>Benutzer-Registration</h2>
         </div>
+        <div id="admin">
+            <form action="http://localhost/AITEC/source/ajax-chat.html">
+                <input type="submit" class="blueButton" value="Zurück">
+            </form>
+        </div>
         <div id="chatLineHolderLogin">
             <?php
                 require('config.php');
@@ -22,31 +27,45 @@
                 $personalnummer = $_POST['pn'] ;
                 $gehalt = $_POST['ge'];
                 $geburtstag = $_POST['gt'];
-                $salt = hash('sha512', uniqid(openssl_random_pseudo_bytes(16), TRUE));
                     
-                
-                if(!$stat = $conn->prepare("INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag) 
-                    VALUES (?,?,?,?,?)")){
-                     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-                }
+                if(ctype_alpha($name) && ctype_alpha($vorname)){
+                    if(ctype_alnum($personalnummer)){
+                        if(ctype_digit($gehalt)){
+                            if(!$stat = $conn->prepare("INSERT INTO personen (name, vorname, personalnummer, gehalt, geburtstag) 
+                                VALUES (?,?,?,?,?)")){
+                                 echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+                            }
 
-                if(!$stat -> bind_param("sssss", $name, $vorname, $personalnummer, $gehalt, $geburtstag)){
-                    echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
-                }
+                            if(!$stat -> bind_param("sssss", $name, $vorname, $personalnummer, $gehalt, $geburtstag)){
+                                echo "Binding parameters failed: (" . $stat->errno . ") " . $stat->error;
+                            }
 
-                if(!$stat->execute()){
-                     echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
+                            if(!$stat->execute()){
+                                 echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
+                            } else {
+                                echo "$vorname \n $name \n wurde der Datenbank hinzugefügt";
+                        ?>
+                            <form action="http://localhost/AITEC/source/ajax-chat.html">
+                                <input type="submit" class="blueButton" value="Zurück">
+                            </form>
+                            <?php
+                            }
+
+                            $stat->close();
+                            $conn->close();
+                        } else {
+                            echo "Das Gehalt darf nur aus Ziffern (0-9) bestehen";
+                            header("Refresh; 2: URL=http://localhost/AITEC/source/registration.html");
+                        }
+                    } else {
+                        echo "Die Personalnummer darf nur aus alphanumerischen Charaktern (a-z/A-Z/0-9) bestehen";
+                        header("Refresh; 2: URL=http://localhost/AITEC/source/registration.html");
+                    }
                 } else {
-                    echo "$vorname \n $name \n wurde der Datenbank hinzugefügt";
-            ?>
-                <form action="http://localhost/AITEC/source/ajax-chat.html">
-                    <input type="submit" class="blueButton" value="Zurück">
-                </form>
-                <?php
-                }
+                    echo "Der Name darf nur aus alphabetischen Charaktern (a-z/A-Z) bestehen";
+                    header("Refresh: 2; URL=http://localhost/AITEC/source/registration.html");
 
-                $stat->close();
-                $conn->close();
+                }
             ?>
         </div>
         <div id="chatBottomBar" class="rounded">

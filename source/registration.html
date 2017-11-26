@@ -11,20 +11,25 @@
 <body>
     <div id="chatContainer">
         <div id="chatTopBar" class="rounded">
+            <div id="admin">
+                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                    <input type="submit" class="blueButton" value="Zurück">
+                </form>
+            </div>
             <h2>Benutzer-Registration</h2>
         </div>
         <div id="chatLineHolderLogin">
-            <form action="http://localhost/AITEC/source/php/registration.php" method="post" >
+            <form action="http://localhost/AITEC/source/php/registration.php" method="post">
                 <input name="pn" size=5>Personalnummer/Benutzername
-                <p>
+                <br/>
                 <input name="vn" size=20>Vorname
-                <p>
+                <br/>
                 <input name="nn" size=20>Nachname
-                <p>
+                <br/>
                 <input name="gt" size=20>Geburtstag (JJJJ-MM-TT)
-                <p>
+                <br/>
                 <input name="ge" size=10>Gehalt in CHF
-                <p>
+                <br/>
                 <b>Information:</b> Ihr Account muss zuerst von einem Administrator freigeschaltet werden, bevor sie sich im Chat anmelden können.
                 <input type="submit" name="Abschicken" value="Registrieren" class="blueButton">
             </form>

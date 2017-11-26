@@ -4,6 +4,7 @@
 require("config.php");
 
 echo $_SERVER['HTTP_REFERER'];
+
 /*$user = "admin";
 if(!$stat = $conn->prepare("SELECT * FROM admin WHERE username=?")){
     echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;

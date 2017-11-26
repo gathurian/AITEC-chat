@@ -49,8 +49,8 @@
                 }
             ?>
             
-            <form action="http://localhost/AITEC/source/ajax-chat.html">
-                    <input type="submit" class="blueButton" value="Go back">
+            <form action="http://localhost/AITEC/source/php/show_users.php">
+                    <input type="submit" class="blueButton" value="Zurück">
             </form>
             </div>
 
