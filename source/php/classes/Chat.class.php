@@ -8,7 +8,7 @@
 class Chat{
 	
 	public static function login($name,$email){
-		if(!$name || !$email){
+		if(!$name || !$email || ($name == "Personalnummer") || ($email == "Passwort") ){
 			throw new Exception('Fill in all the required fields.');
 		}
 		
