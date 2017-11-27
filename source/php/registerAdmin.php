@@ -1,3 +1,5 @@
+<!-- Only used to create an Admin-Account. Not actually in the website -->
+
 <html>
 
 <head>

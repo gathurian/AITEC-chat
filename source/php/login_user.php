@@ -3,8 +3,8 @@
     require('functions.php');
     
     //error-reporting
-    //ini_set('display_errors', 1);
-    //error_reporting(E_ALL ^ E_NOTICE);
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL ^ E_NOTICE);
 
     $user = trim($_POST['user']);
     $passwd = trim($_POST['passwd']);
@@ -30,7 +30,7 @@
             if($password == $passcode){
                 if($approved == 1){
                     sec_session_start();
-                    $_SESSION['logon'] = 1;_alt
+                    $_SESSION['logon'] = 1;
                     echo "$user ist nun eingeloggt";
                 } else {
                     echo "$user ist nicht authorisiert zu chatten";
@@ -42,6 +42,6 @@
         $stat -> close();
     } else {
     echo "Bitte geben Sie einen gültigen Benutzernamen und ein gültiges Passwort ein";
-
+    }
     $conn->close();
 ?>

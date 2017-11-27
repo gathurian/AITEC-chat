@@ -14,7 +14,6 @@
             <h2>Benutzer-Freischaltung</h2>
         </div>
         <?php
-            //if($_SESSION['logon'] != 1){
             if($_SERVER[HTTP_REFERER]!= "http://localhost/AITEC/source/php/show_users.php"){
                 echo "Benutzer können nur über das Admin-Panel freigeschaltet werden.";
                 ?>
