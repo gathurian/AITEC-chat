@@ -18,5 +18,5 @@ setcookie(session_name(),
  
 // Vernichte die Session 
 session_destroy();
-header('Location: http://localhost/AITEC/source/ajax-chat.html');
+header('Location: ../ajax-chat.html');
 ?>

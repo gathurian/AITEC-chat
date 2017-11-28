@@ -3,9 +3,9 @@
 <head>
     <title>AITEC HS2017 - PHP WebChat</title>
 
-    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.css" />
-    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/page.css" />
-    <link rel="stylesheet" type="text/css" href="http://localhost/AITEC/source/css/chat.css" />
+    <link rel="stylesheet" type="text/css" href="../js/jScrollPane/jScrollPane.css" />
+    <link rel="stylesheet" type="text/css" href="../css/page.css" />
+    <link rel="stylesheet" type="text/css" href="../css/chat.css" />
 </head>
 
 <body>
@@ -97,9 +97,9 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script src="http://localhost/AITEC/source/js/jScrollPane/jquery.mousewheel.js"></script>
-    <script src="http://localhost/AITEC/source/js/jScrollPane/jScrollPane.min.js"></script>
-    <script src="http://localhost/AITEC/source/js/script.js"></script>
+    <script src="../js/jScrollPane/jquery.mousewheel.js"></script>
+    <script src="../js/jScrollPane/jScrollPane.min.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
