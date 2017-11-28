@@ -10,7 +10,7 @@ class Chat{
         if($loggedIn == 0){
 
             // Preparing the gravatar hash:
-            $gravatar = md5(strtolower(trim($passwd)));
+            $gravatar = md5(strtolower(trim($persnr)));
 
             $user = new ChatUser(array(
                 'name'		=> $persnr,
@@ -70,7 +70,7 @@ class Chat{
 		unset($_SESSION);
 
 		return array('status' => 1);
-        header("http://localhost/AITEC/source/ajax-chat.html");
+        header("Refresh:2");
 	}
 	
 	public static function submitChat($chatText){
@@ -85,7 +85,7 @@ class Chat{
 		$chat = new ChatLine(array(
 			'author'	=> $_SESSION['user']['name'],
 			'gravatar'	=> $_SESSION['user']['gravatar'],
-			'text'		=> $chatText
+			'text'		=> htmlspecialchars(mysql_real_escape_string($chatText))
 		));
 	
 		// The save method returns a MySQLi object
