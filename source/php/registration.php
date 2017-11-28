@@ -15,7 +15,7 @@
         </div>
         <div id="admin">
             <form action="http://localhost/AITEC/source/ajax-chat.html">
-                <input type="submit" class="blueButton" value="Zurück">
+                <input type="submit" class="blueButton" value="Back">
             </form>
         </div>
         <div id="chatLineHolderLogin">
@@ -43,10 +43,10 @@
                             if(!$stat->execute()){
                                  echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                             } else {
-                                echo "$vorname \n $name \n wurde der Datenbank hinzugefügt";
+                                echo "$vorname \n $name \n has been added to the database";
                         ?>
                             <form action="http://localhost/AITEC/source/ajax-chat.html">
-                                <input type="submit" class="blueButton" value="Zurück">
+                                <input type="submit" class="blueButton" value="Back">
                             </form>
                             <?php
                             }

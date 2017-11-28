@@ -11,11 +11,11 @@
 <body>
     <div id="chatContainer">
         <div id="chatTopBar" class="rounded">
-            <h2>Benutzer-Freischaltung</h2>
+            <h2>User approval</h2>
         </div>
         <?php
             if($_SERVER[HTTP_REFERER]!= "http://localhost/AITEC/source/php/show_users.php"){
-                echo "Benutzer können nur über das Admin-Panel freigeschaltet werden.";
+                echo "User can only be approved over the admin-panel";
                 ?>
                 <style type="text/css">#chatLineHolderLogin{
                 display:none;
@@ -26,7 +26,7 @@
             $personalnummer = $_POST['persnr']; 
         ?>
         <div id="chatLineHolderLogin">
-            Bitte setzen Sie ein Passwort für den freizuschaltenden Benutzer
+            Please set a password for the approved user
             <form action="http://localhost/AITEC/source/php/approve.php" method="post" >
                 <input name="persnr" value="<?php echo htmlspecialchars($personalnummer); ?>" readonly>
                 <br/>
@@ -34,7 +34,7 @@
                  <script language='javascript' type='text/javascript'>
                     function check(input) {
                         if (input.value == 'Passwort') {
-                            input.setCustomValidity('Passwort darf nicht "Passwort" sein');
+                            input.setCustomValidity('Password cannot be "Passwort"');
                         } else {
                             // input is valid -- reset the error message
                             input.setCustomValidity('');
@@ -46,7 +46,7 @@
                 <script language='javascript' type='text/javascript'>
                     function checkMatch(input) {
                         if (input.value != document.getElementById('pw').value) {
-                            input.setCustomValidity('Passwörter stimmen nicht überein.');
+                            input.setCustomValidity('Passwords do not match.');
                         } else {
                             // input is valid -- reset the error message
                             input.setCustomValidity('');
@@ -54,7 +54,7 @@
                     }
                 </script>
                 <br/>
-                <input type="submit" name="Abschicken" value="Freischalten" class="blueButton">
+                <input type="submit" name="Abschicken" value="Approve" class="blueButton">
             </form>
         </div>
         <div id="chatBottomBar" class="rounded">

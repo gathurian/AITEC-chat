@@ -11,7 +11,7 @@
 function userLogin($user, $passwd){   
     require('config.php');
     
-    $status = false;
+    $derp = 4;
     
     if((!empty($user)) && (!empty($passwd))){
         if(!$stat = $conn->prepare("SELECT * FROM personen WHERE personalnummer=?")){
@@ -33,19 +33,19 @@ function userLogin($user, $passwd){
 
             if($password == $passcode){
                 if($approved == 1){
-                    $status = true;
+                    $derp = 0;
                 } else {
-                    $status = false;
+                    $derp = 1;
                 }
             } else {
-                $status = false;
+                $derp = 2;
             }
         }
         $stat -> close();
     } else {
-        $status = false;
+        $derp = 3;
     }
     $conn->close();
-    return $status;
+    return $derp;
 }
 ?>

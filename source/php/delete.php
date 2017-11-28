@@ -39,12 +39,12 @@
                     if(!$stat->execute()){
                          echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                     } else {
-                        echo "User gelöscht";
+                        echo "User deleted";
                     }
 
                     $conn->close();
                 } else {
-                    echo "Benutzer können nur über das Admin-Panel gelöscht werden";
+                    echo "User can only be deleted over the admin panel";
                     header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                 }
             ?>

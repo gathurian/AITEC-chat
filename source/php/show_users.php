@@ -45,8 +45,8 @@
                     echo "<table>";
                     echo "<tr>
                             <th id='persNo'>Pers. Nr</th>
-                            <th>Vorname</th>
-                            <th>Nachname</th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
                             <th id='adminApproved'></th>
                             <th></th>
                         </tr>";
@@ -81,7 +81,7 @@
                                 <td>
                                     <form action='http://localhost/AITEC/source/php/delete.php' method='post'>
                                         <input type='hidden' name='persnr' value='".$personalnummer."'>
-                                        <input type='submit' class='blueButton' value='Löschen'>
+                                        <input type='submit' class='blueButton' value='Delete'>
                                     </form>
                                 </td>
                             </tr>";
@@ -91,7 +91,7 @@
                     echo "</table>";
                     mysqli_close($con);
                 } else {
-                    echo "Sie müssen eingeloggt sein, um diese Seite sehen zu können. <br/> Bitte loggen Sie sich ein";
+                    echo "You need to be logged in to view this page. <br/> Please login";
                     header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
                 }
             ?>

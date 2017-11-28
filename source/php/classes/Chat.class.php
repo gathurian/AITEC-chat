@@ -1,15 +1,13 @@
 <?php
 
-//ToDo: Actually implement UserLogin (--> See user_login.php for inspiration)
-
 /* The Chat class exploses public static methods, used by ajax.php */
 
 class Chat{
 	
 	public static function login($persnr,$passwd){
-		require('login_user.php');
-        
-        if(userLogin($persnr, $passwd)){
+		require('loginUser.php');
+        $loggedIn = userLogin($persnr, $passwd);
+        if($loggedIn == 0){
 
             // Preparing the gravatar hash:
             $gravatar = md5(strtolower(trim($passwd)));
@@ -35,7 +33,18 @@ class Chat{
                 'gravatar'	=> Chat::gravatarFromHash($gravatar)
             );
         } else {
-            throw new Exception("Nope");
+            if($loggedIn == 1){
+                throw new Exception("You're not authorized to chat");
+            }
+            if($loggedIn == 2){
+                throw new Exception("Wrong logindata");
+            }
+            if($loggedIn == 3){
+                throw new Exception("Please enter a personal number and a password");
+            }
+            else{
+                throw new Exception("Dude, what did you do?");
+            }
         }
                 
 	}

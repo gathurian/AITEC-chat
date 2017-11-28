@@ -48,13 +48,13 @@
                     if(!$stat->execute()){
                          echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                     } else {
-                        echo "$persnr \n kann nun chatten";
+                        echo "$persnr \n is now authorized to chat";
                         header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                     }
 
                     $conn->close();
                 } else {
-                    echo "Benutzer können nur über das Admin-Panel freigeschaltet werden";
+                    echo "User can only be authorized over the admin-panel";
                     header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                 }
             ?>

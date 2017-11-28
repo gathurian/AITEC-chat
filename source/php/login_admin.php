@@ -52,13 +52,13 @@
                             header("Refresh: 1; URL=http://localhost/AITEC/source/php/show_users.php");
                             exit;
                         } else {
-                            echo "Ungültige Logindaten";
+                            echo "Wrong login data";
                             header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
                         }
                     }
                     $stat -> close();
                 } else {
-                    echo "Bitte geben Sie einen gültigen Benutzernamen und ein gültiges Passwort ein";
+                    echo "Please enter a valid username and password";
                     header("Refresh: 1; URL=http://localhost/AITEC/source/php/login_admin.html");
                 }
 

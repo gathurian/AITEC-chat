@@ -44,13 +44,13 @@
                     if(!$stat->execute()){
                          echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                     } else {
-                        echo "$persnr \n kann nun nicht mehr chatten";
+                        echo "$persnr \n is not authorized anymore";
                         header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                     }
 
                     $conn->close();
                 } else {
-                    echo "Benutzer können nun über das Admin-Panel geblockt werden";
+                    echo "Users can only be blocked from the admin panel";
                     header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
                 }
             ?>
