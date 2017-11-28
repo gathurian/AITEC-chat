@@ -30,11 +30,21 @@
             <form action="http://localhost/AITEC/source/php/approve.php" method="post" >
                 <input name="persnr" value="<?php echo htmlspecialchars($personalnummer); ?>" readonly>
                 <br/>
-                <input name="pw" type="password" id="pw"> Passwort
-                <br/>
-                <input name="pw_conf" type="password" id="pw_conf" oninput="check(this)"> Passwort bestätigen
-                <script language='javascript' type='text/javascript'>
+                <input name="pw" type="password" id="pw" oninput="check(this)"> Passwort
+                 <script language='javascript' type='text/javascript'>
                     function check(input) {
+                        if (input.value == 'Passwort') {
+                            input.setCustomValidity('Passwort darf nicht "Passwort" sein');
+                        } else {
+                            // input is valid -- reset the error message
+                            input.setCustomValidity('');
+                        }
+                    }
+                </script>
+                <br/>
+                <input name="pw_conf" type="password" id="pw_conf" oninput="checkMatch(this)"> Passwort bestätigen
+                <script language='javascript' type='text/javascript'>
+                    function checkMatch(input) {
                         if (input.value != document.getElementById('pw').value) {
                             input.setCustomValidity('Passwörter stimmen nicht überein.');
                         } else {

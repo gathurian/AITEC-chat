@@ -3,7 +3,7 @@
 //ToDo: Actually implement UserLogin (--> See user_login.php for inspiration)
 
 /* The Chat class exploses public static methods, used by ajax.php */
-//include 'config.php';
+include 'config.php';
 
 class Chat{
 	
@@ -11,6 +11,7 @@ class Chat{
 		if(!$name || !$email || ($name == "Personalnummer") || ($email == "Passwort") ){
 			throw new Exception('Fill in all the required fields.');
 		}
+        
 		
 /*		Use Personalnumber + Password instead of E-Mail
 
@@ -18,29 +19,30 @@ class Chat{
 			throw new Exception('Your email is invalid.');
 		}*/
 		
-		// Preparing the gravatar hash:
+/*		// Preparing the gravatar hash:
 		$gravatar = md5(strtolower(trim($email)));
 		
 		$user = new ChatUser(array(
 			'name'		=> $name,
 			'gravatar'	=> $gravatar
-		));
-		
-		// The save method returns a MySQLi object
+		));*/
+        		
+/*		// The save method returns a MySQLi object
 		 if($user->save()->affected_rows != 1){
 		 	throw new Exception('This nick is in use.');
 		 }
-		
-		$_SESSION['user']	= array(
+		*/
+/*		$_SESSION['user']	= array(
 			'name'		=> $name,
 			'gravatar'	=> $gravatar
-		);
+		);*/
 		
-		return array(
+/*		return array(
 			'status'	=> 1,
 			'name'		=> $name,
 			'gravatar'	=> Chat::gravatarFromHash($gravatar)
-		);
+		);*/
+                
 	}
 	
 	public static function checkLogged(){
