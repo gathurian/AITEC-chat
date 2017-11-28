@@ -16,8 +16,9 @@
             <h2>Benutzer-Registration</h2>
         </div>
         <div id="chatLineHolderLogin">
+            <img src="https://i.imgur.com/MBlS7Wr.gif" alt="Nothing to see here">
             <?php
-                require('config.php');
+                /*require('config.php');
                 
                 $user = $_POST['un'];
                 $pw = $_POST['pw'];
@@ -37,16 +38,16 @@
                 if(!$stat->execute()){
                      echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                 } else {
-                    echo "$vorname \n $name \n wurde der Datenbank hinzugefügt";
+                    echo "You're an Admin, Harry";*/
             ?>
-                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                <!--<form action="http://localhost/AITEC/source/ajax-chat.html">
                     <input type="submit" class="blueButton" value="Zurück">
-                </form>
+                </form>-->
                 <?php
-                }
+                /*}
 
                 $stat->close();
-                $conn->close();
+                $conn->close();*/
             ?>
         </div>
         <div id="chatBottomBar" class="rounded">

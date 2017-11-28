@@ -11,22 +11,22 @@
 <body>
     <div id="chatContainer">
         <div id="chatTopBar" class="rounded">
-            <h2>Benutzer-Registration</h2>
-        </div>
-        <div id="admin">
-            <form action="http://localhost/AITEC/source/ajax-chat.html">
-                <input type="submit" class="blueButton" value="Back">
-            </form>
+            <div id="admin">
+                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                    <input type="submit" class="blueButton" value="Back">
+                </form>
+            </div>
+            <h2>User registration</h2>
         </div>
         <div id="chatLineHolderLogin">
             <?php
                 require('config.php');
                 
-                $name = $_POST['nn'];
-                $vorname = $_POST['vn'];
-                $personalnummer = $_POST['pn'] ;
-                $gehalt = $_POST['ge'];
-                $geburtstag = $_POST['gt'];
+                $name = htmlspecialchars($_POST['nn']);
+                $vorname = htmlspecialchars($_POST['vn']);
+                $personalnummer = htmlspecialchars($_POST['pn']);
+                $gehalt = htmlspecialchars($_POST['ge']);
+                $geburtstag = htmlspecialchars($_POST['gt']);
                     
                 if(ctype_alpha($name) && ctype_alpha($vorname)){
                     if(ctype_alnum($personalnummer)){
@@ -45,24 +45,24 @@
                             } else {
                                 echo "$vorname \n $name \n has been added to the database";
                         ?>
-                            <form action="http://localhost/AITEC/source/ajax-chat.html">
-                                <input type="submit" class="blueButton" value="Back">
-                            </form>
-                            <?php
+                                <form action="http://localhost/AITEC/source/ajax-chat.html">
+                                    <input type="submit" class="blueButton" value="Back">
+                                </form>
+                                <?php
                             }
 
                             $stat->close();
                             $conn->close();
                         } else {
-                            echo "Das Gehalt darf nur aus Ziffern (0-9) bestehen";
+                            echo "Invalid input. Your salary must consist of numbers from 0 - 9";
                             header("Refresh; 2: URL=http://localhost/AITEC/source/registration.html");
                         }
                     } else {
-                        echo "Die Personalnummer darf nur aus alphanumerischen Charaktern (a-z/A-Z/0-9) bestehen";
+                        echo "Invalid Input. Your personal number must consist of alphanumeric characters (aA - zZ & 0 - 9)";
                         header("Refresh; 2: URL=http://localhost/AITEC/source/registration.html");
                     }
                 } else {
-                    echo "Der Name darf nur aus alphabetischen Charaktern (a-z/A-Z) bestehen";
+                    echo "Invalid Input. Your name must consist of alphabetical characters (aA - zZ)";
                     header("Refresh: 2; URL=http://localhost/AITEC/source/registration.html");
 
                 }

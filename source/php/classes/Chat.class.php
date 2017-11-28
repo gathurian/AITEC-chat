@@ -81,11 +81,10 @@ class Chat{
 		if(!$chatText){
 			throw new Exception('You haven\' entered a chat message.');
 		}
-	
 		$chat = new ChatLine(array(
 			'author'	=> $_SESSION['user']['name'],
 			'gravatar'	=> $_SESSION['user']['gravatar'],
-			'text'		=> htmlspecialchars(mysql_real_escape_string($chatText))
+			'text'		=> htmlspecialchars($chatText)
 		));
 	
 		// The save method returns a MySQLi object
