@@ -17,7 +17,7 @@
 
         <div id="chatTopBar" class="rounded">
             <div id="admin">
-                <form action="http://localhost/AITEC/source/php/logout.php">
+                <form action="logout.php">
                     <input type="submit" class="blueButton" value="Logout">
                 </form>
             </div>
@@ -58,14 +58,14 @@
                         $approved = $row['approved'];
                         if($approved === '0'){
                             $status =
-                                "<form action='http://localhost/AITEC/source/php/set_approve.php' method='post'>
+                                "<form action=approve.php' method='post'>
                                     <input type='hidden' name='persnr' value='".$personalnummer."'>
                                     <input type='submit' class='blueButton' value='Approve'>
                                 </form>";
                         }
                         else{
                             $status = 
-                                "<form action='http://localhost/AITEC/source/php/disapprove.php' method='post'>
+                                "<form action='disapprove.php' method='post'>
                                     <input type='hidden' name='persnr' value='".$personalnummer."'>
                                     <input type='submit' class='blueButton' value='Disapprove'>
                                 </form>";
@@ -79,7 +79,7 @@
                                 <td>" .$vorname. "</td>
                                 <td>" .$status. "</td>
                                 <td>
-                                    <form action='http://localhost/AITEC/source/php/delete.php' method='post'>
+                                    <form action='delete.php' method='post'>
                                         <input type='hidden' name='persnr' value='".$personalnummer."'>
                                         <input type='submit' class='blueButton' value='Delete'>
                                     </form>
@@ -92,7 +92,7 @@
                     mysqli_close($con);
                 } else {
                     echo "You need to be logged in to view this page. <br/> Please login";
-                    header("Refresh: 2; URL=http://localhost/AITEC/source/login_admin.html");
+                    header("Refresh: 2; URL=../login_admin.php");
                 }
             ?>
         </div>

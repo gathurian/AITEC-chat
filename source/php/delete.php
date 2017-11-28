@@ -17,7 +17,7 @@
 
         <div id="chatTopBar" class="rounded">
             <div id="admin">
-                <form action="http://localhost/AITEC/source/php/logout.php">
+                <form action="logout.php">
                     <input type="submit" class="blueButton" value="Logout">
                 </form>
             </div>
@@ -26,8 +26,12 @@
         </div>
         <div id="chatLineHolderAdmin">
             <?php
+                require('functions.php');
                 require('config.php');
-                if($_SERVER[HTTP_REFERER]== "http://localhost/AITEC/source/php/show_users.php"){
+            
+                sec_session_start();
+                if($_SESSION['logon'] == 1){
+                     $persnr = $_POST['persnr'];
                     if(!$stat = $conn->prepare("DELETE FROM personen WHERE personalnummer=?")){
                             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                     }
@@ -44,12 +48,12 @@
 
                     $conn->close();
                 } else {
-                    echo "User can only be deleted over the admin panel";
-                    header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
+                    echo "Please login to delete users";
+                    header("Refresh: 2; URL=../login_admin.html");
                 }
             ?>
             
-            <form action="http://localhost/AITEC/source/php/show_users.php">
+            <form action="show_users.php">
                     <input type="submit" class="blueButton" value="Zurück">
             </form>
             </div>

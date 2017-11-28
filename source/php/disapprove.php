@@ -17,7 +17,7 @@
 
         <div id="chatTopBar" class="rounded">
             <div id="admin">
-                <form action="http://localhost/AITEC/source/php/logout.php">
+                <form action="logout.php">
                     <input type="submit" class="blueButton" value="Logout">
                 </form>
             </div>
@@ -27,12 +27,15 @@
         <div id="chatLineHolderAdmin">
             <?php
                 require('config.php');
+                require('functions.php');
 
                 ini_set('display_errors', 1);
                 error_reporting(E_ALL ^ E_NOTICE);
 
                 $persnr = $_POST['persnr'];
-               if($_SERVER[HTTP_REFERER] == "http://localhost/AITEC/source/php/show_users.php"){
+                           
+                sec_session_start();
+                if($_SESSION['logon'] == 1){
                     if(!$stat = $conn->prepare("UPDATE personen SET approved=0 WHERE personalnummer=?")){
                             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                     }
@@ -45,13 +48,13 @@
                          echo "Execute failed: (" . $stat->errno . ") " . $stat->error;
                     } else {
                         echo "$persnr \n is not authorized anymore";
-                        header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
+                        header("Refresh: 2; URL=show_users.php");
                     }
 
                     $conn->close();
                 } else {
-                    echo "Users can only be blocked from the admin panel";
-                    header("Refresh: 2; URL=http://localhost/AITEC/source/php/show_users.php");
+                    echo "Please login to block user";
+                    header("Refresh: 2; URL=../login_admin.html");
                 }
             ?>
         </div>
