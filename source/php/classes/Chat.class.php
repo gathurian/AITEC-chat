@@ -3,45 +3,40 @@
 //ToDo: Actually implement UserLogin (--> See user_login.php for inspiration)
 
 /* The Chat class exploses public static methods, used by ajax.php */
-include 'config.php';
 
 class Chat{
 	
-	public static function login($name,$email){
-		if(!$name || !$email || ($name == "Personalnummer") || ($email == "Passwort") ){
-			throw new Exception('Fill in all the required fields.');
-		}
+	public static function login($persnr,$passwd){
+		require('login_user.php');
         
-		
-/*		Use Personalnumber + Password instead of E-Mail
+        if(userLogin($persnr, $passwd)){
 
-        if(!filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL)){
-			throw new Exception('Your email is invalid.');
-		}*/
-		
-/*		// Preparing the gravatar hash:
-		$gravatar = md5(strtolower(trim($email)));
-		
-		$user = new ChatUser(array(
-			'name'		=> $name,
-			'gravatar'	=> $gravatar
-		));*/
-        		
-/*		// The save method returns a MySQLi object
-		 if($user->save()->affected_rows != 1){
-		 	throw new Exception('This nick is in use.');
-		 }
-		*/
-/*		$_SESSION['user']	= array(
-			'name'		=> $name,
-			'gravatar'	=> $gravatar
-		);*/
-		
-/*		return array(
-			'status'	=> 1,
-			'name'		=> $name,
-			'gravatar'	=> Chat::gravatarFromHash($gravatar)
-		);*/
+            // Preparing the gravatar hash:
+            $gravatar = md5(strtolower(trim($passwd)));
+
+            $user = new ChatUser(array(
+                'name'		=> $persnr,
+                'gravatar'	=> $gravatar
+            ));
+
+            // The save method returns a MySQLi object
+             if($user->save()->affected_rows != 1){
+                throw new Exception('This nick is in use.');
+             }
+
+            $_SESSION['user']	= array(
+                'name'		=> $persnr,
+                'gravatar'	=> $gravatar
+            );
+
+            return array(
+                'status'	=> 1,
+                'name'		=> $persnr,
+                'gravatar'	=> Chat::gravatarFromHash($gravatar)
+            );
+        } else {
+            throw new Exception("Nope");
+        }
                 
 	}
 	
@@ -66,6 +61,7 @@ class Chat{
 		unset($_SESSION);
 
 		return array('status' => 1);
+        header("http://localhost/AITEC/source/ajax-chat.html");
 	}
 	
 	public static function submitChat($chatText){

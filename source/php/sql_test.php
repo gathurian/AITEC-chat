@@ -2,8 +2,14 @@
                 ini_set('display_errors', 1);
                 error_reporting(E_ALL ^ E_NOTICE);
 require("config.php");
+require('login_user.php');
 
-echo $_SERVER['HTTP_REFERER'];
+$user = $_POST['user'];
+$passwd = $_POST['passwd'];
+
+if(userLogin($user, $passwd)){
+    echo "Test worked";
+}
 
 /*$user = "admin";
 if(!$stat = $conn->prepare("SELECT * FROM admin WHERE username=?")){

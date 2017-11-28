@@ -3,13 +3,13 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<form id="foo">
+<form id="foo" action="http://localhost/AITEC/source/php/sql_test.php" method="post">
     <input id="name" name="user" class="rounded" maxlength="16" />
     <input id="email" name="passwd" type="password" class="rounded" />
     <input type="submit" value="Test">
 </form>
 
-<script>
+<!--<script>
     var request;
     $("#foo").submit(function(event) {
 
@@ -45,7 +45,6 @@
         request.done(function(response, textStatus, jqXHR) {
             // Log a message to the console
             console.log("Response: " + response);
-            console.log("Hooray, it worked!");
         });
 
         // Callback handler that will be called on failure
@@ -66,6 +65,6 @@
 
     });
 
-</script>
+</script>-->
 
 </html>

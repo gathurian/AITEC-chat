@@ -11,10 +11,9 @@
 function userLogin($user, $passwd){   
     require('config.php');
     
-    $logged = false;
+    $status = false;
     
-    if((!empty($user)) && (!
-                           empty($passwd))){
+    if((!empty($user)) && (!empty($passwd))){
         if(!$stat = $conn->prepare("SELECT * FROM personen WHERE personalnummer=?")){
             echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
         }
@@ -34,19 +33,19 @@ function userLogin($user, $passwd){
 
             if($password == $passcode){
                 if($approved == 1){
-                    $logged = true;
+                    $status = true;
                 } else {
-                    $logged = false;
+                    $status = false;
                 }
             } else {
-                $logged = false;
+                $status = false;
             }
         }
         $stat -> close();
     } else {
-        $logged = false;;
+        $status = false;
     }
     $conn->close();
-    return $logged;
+    return $status;
 }
 ?>
